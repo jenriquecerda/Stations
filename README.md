@@ -1,9 +1,7 @@
-### Build Docker Container
+Application runs on docker containers. You'll need to install Docker first and run it through it.
 
-```docker build -t stations-app .```
+### Run App in Docker
 
-### Run Docker Container
-
-```docker run --rm -d -p 8080:80 --name app-container stations-app```
+```docker-compose up```
 
 Project runs on ```http://localhost:8080```
