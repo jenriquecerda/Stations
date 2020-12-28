@@ -8,8 +8,11 @@ namespace Acuity.Data {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<Part>().ToTable("Part");
+            modelBuilder.Entity<Product>().ToTable("Product");
         }
 
         public DbSet<Part> Parts { get; set; }
+
+        public DbSet<Product> Product { get; set; }
     }
 }

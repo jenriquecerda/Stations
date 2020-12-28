@@ -21,6 +21,14 @@ namespace Acuity.Data {
                 );
             }
 
+            var fakeProducts = new Faker<Product>()
+                .RuleFor(p => p.Name, f => f.Commerce.ProductName())
+                .RuleFor(p => p.Description, f => f.Commerce.ProductDescription()).Generate(10);
+
+            foreach(var product in fakeProducts){
+                context.Product.Add(product);
+            }
+
             context.SaveChanges();
         }
     }
