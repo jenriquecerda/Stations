@@ -9,10 +9,13 @@ namespace Acuity.Data {
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<Part>().ToTable("Part");
             modelBuilder.Entity<Product>().ToTable("Product");
+            modelBuilder.Entity<Bom>().ToTable("Bom");
         }
 
         public DbSet<Part> Parts { get; set; }
 
         public DbSet<Product> Product { get; set; }
+
+        public DbSet<Bom> Bom { get; set; }
     }
 }
