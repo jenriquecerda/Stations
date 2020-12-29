@@ -18,7 +18,7 @@ namespace Stations.Controllers {
 
         // GET: Boms
         public async Task<IActionResult> Index() {
-            var acuityContext = _context.Bom.Include(b => b.Part).Include(b => b.Product);
+            var acuityContext = _context.Bom.Include(b => b.Part).Include(b => b.Product).OrderBy(b => b.Product.Name).ThenBy(b => b.Part.Name);
             return View(await acuityContext.ToListAsync());
         }
 
@@ -41,7 +41,7 @@ namespace Stations.Controllers {
 
         // GET: Boms/Create
         public IActionResult Create() {
-            ViewData["PartId"] = new SelectList(_context.Parts, "PartId", "Name");
+            ViewData["PartId"] = new SelectList(_context.Part, "PartId", "Name");
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name");
             return View();
         }
@@ -57,7 +57,7 @@ namespace Stations.Controllers {
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PartId"] = new SelectList(_context.Parts, "PartId", "Name", bom.PartId);
+            ViewData["PartId"] = new SelectList(_context.Part, "PartId", "Name", bom.PartId);
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", bom.ProductId);
             return View(bom);
         }
@@ -72,7 +72,7 @@ namespace Stations.Controllers {
             if (bom == null) {
                 return NotFound();
             }
-            ViewData["PartId"] = new SelectList(_context.Parts, "PartId", "Name", bom.PartId);
+            ViewData["PartId"] = new SelectList(_context.Part, "PartId", "Name", bom.PartId);
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", bom.ProductId);
             return View(bom);
         }
@@ -100,7 +100,7 @@ namespace Stations.Controllers {
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PartId"] = new SelectList(_context.Parts, "PartId", "Name", bom.PartId);
+            ViewData["PartId"] = new SelectList(_context.Part, "PartId", "Name", bom.PartId);
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", bom.ProductId);
             return View(bom);
         }

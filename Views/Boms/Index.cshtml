@@ -7,49 +7,55 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
+
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Part)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Part.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BomId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BomId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BomId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Part)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count(); i++){
+                string currentProductName = Model.ElementAt(i).Product.Name;
+                <tr>
+                    <td>
+                        @if (i == 0 || (@currentProductName != Model.ElementAt(i - 1).Product.Name)){
+                            @Html.DisplayFor(modelItem => @currentProductName)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.ElementAt(i).Part.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.ElementAt(i).Quantity)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@Model.ElementAt(i).BomId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@Model.ElementAt(i).BomId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@Model.ElementAt(i).BomId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </body>
+
 </html>

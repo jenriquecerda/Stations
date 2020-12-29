@@ -1,0 +1,29 @@
+@model Acuity.ViewModels.ProductBomViewModel
+
+<h1>BOM</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Part
+      </th>
+      <th>
+        Quantity
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in Model.Parts)
+    {
+      <tr>
+        <td>
+          @Html.DisplayFor(part => item.Key)
+        </td>
+        <td>
+          @Html.DisplayFor(part => item.Value)
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

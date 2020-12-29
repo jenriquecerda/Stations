@@ -1,4 +1,4 @@
-@model Acuity.Models.Product
+@model Acuity.ViewModels.ProductBomViewModel;
 
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
@@ -31,6 +31,11 @@
         </dd>
     </dl>
 </div>
+
+<div>
+   @await Html.PartialAsync("_ProductBom", Model)
+</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> |
     <a asp-action="Index">Back to List</a>

@@ -22,7 +22,7 @@ namespace Stations.Controllers
         // GET: Parts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Parts.ToListAsync());
+            return View(await _context.Part.ToListAsync());
         }
 
         // GET: Parts/Details/5
@@ -33,7 +33,7 @@ namespace Stations.Controllers
                 return NotFound();
             }
 
-            var part = await _context.Parts
+            var part = await _context.Part
                 .FirstOrDefaultAsync(m => m.PartId == id);
             if (part == null)
             {
@@ -73,7 +73,7 @@ namespace Stations.Controllers
                 return NotFound();
             }
 
-            var part = await _context.Parts.FindAsync(id);
+            var part = await _context.Part.FindAsync(id);
             if (part == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace Stations.Controllers
                 return NotFound();
             }
 
-            var part = await _context.Parts
+            var part = await _context.Part
                 .FirstOrDefaultAsync(m => m.PartId == id);
             if (part == null)
             {
@@ -139,15 +139,15 @@ namespace Stations.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var part = await _context.Parts.FindAsync(id);
-            _context.Parts.Remove(part);
+            var part = await _context.Part.FindAsync(id);
+            _context.Part.Remove(part);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PartExists(int id)
         {
-            return _context.Parts.Any(e => e.PartId == id);
+            return _context.Part.Any(e => e.PartId == id);
         }
     }
 }

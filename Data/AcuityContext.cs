@@ -12,7 +12,7 @@ namespace Acuity.Data {
             modelBuilder.Entity<Bom>().ToTable("Bom");
         }
 
-        public DbSet<Part> Parts { get; set; }
+        public DbSet<Part> Part { get; set; }
 
         public DbSet<Product> Product { get; set; }
 
